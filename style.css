@@ -1,0 +1,96 @@
+/* Podstawowy styl strony */
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Lewy panel nawigacyjny */
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    text-align: center;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Główna zawartość */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+section {
+    margin: 20px 0;
+}
+
+#drawings img {
+    margin-right: 10px;
+    width: 200px;
+    height: auto;
+}
+
+#code-section {
+    margin-top: 20px;
+}
+
+#code-input {
+    width: 100%;
+    height: 100px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#output {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-top: 10px;
+    white-space: pre-wrap;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}

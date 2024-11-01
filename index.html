@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona z Kodem Numerycznym</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Lewy panel nawigacyjny -->
+    <div class="sidebar">
+        <h2>Logo</h2>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#drawings">Rysunki</a></li>
+                <li><a href="#code-section">Kod Numeryczny</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Główna zawartość strony -->
+    <div class="main-content">
+        <!-- Nagłówek -->
+        <header>
+            <h1>Witamy na stronie z kodem numerycznym</h1>
+        </header>
+
+        <!-- Sekcja rysunków -->
+        <section id="drawings">
+            <h2>Rysunki</h2>
+            <p>Tutaj znajdują się przykładowe rysunki:</p>
+            <img src="https://via.placeholder.com/200" alt="Przykładowy rysunek 1">
+            <img src="https://via.placeholder.com/200" alt="Przykładowy rysunek 2">
+        </section>
+
+        <!-- Sekcja kodu numerycznego -->
+        <section id="code-section">
+            <h2>Wprowadź Kod Numeryczny</h2>
+            <textarea id="code-input" placeholder="Wprowadź kod..."></textarea>
+            <button onclick="executeCode()">Uruchom Kod</button>
+            <pre id="output"></pre>
+        </section>
+
+        <!-- Stopka -->
+        <footer>
+            <p>Strona stworzona dla celów edukacyjnych</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
