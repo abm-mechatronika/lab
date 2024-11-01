@@ -38,7 +38,95 @@
                 <option value="matlab">Matlab</option>
                 <option value="cpp">C++</option>
             </select>
-            <pre><code id="code-example" class="language-python">// Kod pojawi się tutaj</code></pre>
+            <pre><code id="code-example" class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Definiowanie funkcji f1 i f2
+def f1(x1, c1, b1):
+    return -c1 * x1 + b1 * x1**-3
+
+def f2(x1, c2, b2):
+    return -c2 * x1 + b2 * x1**-3
+
+# Define the function
+def func_right_branch(x1, A=9, d1=12.6, d2=0.34):
+    return A + d1 * np.log10(d2 * x1)
+
+def calculate_x1(y, A, d1, d2):
+    if d1 == 0 or d2 == 0:
+        raise ValueError("d1 and d2 must be non-zero.")
+    x1 = 10**((y - A) / d1) / d2
+    return x1
+
+
+# Definiowanie funkcji x3 dodatniej aproksymacji (prawej strony) tarcia statycznego
+def x3_fun(y, c1, b1):
+    return np.pi / 2 - np.arctan(f1(y, c1, b1))
+# Definiowanie funkcji x4 ujemnej aproksymacji (lewej strony) tarcia statycznego
+def x4(y, c2, b2):
+    return -np.pi / 2 - np.arctan(f2(y, c2, b2))
+
+# Pochodna dx3/dy
+def dx3_dy_fun(y, c1, b1):
+    f1_val = -c1 * y + b1 * y**-3
+    f1_prime = -c1 - 3 * b1 * y**-4
+    return -f1_prime / (1 + f1_val**2)
+
+
+
+# Parametry
+c1, b1 = 90, 3
+c2, b2 = 3, 140
+
+A, d1, d2 = 8.0, 16.26, 0.8
+
+# Przedziały
+x1_vals = np.linspace(1, 5, 500)  # Przedział x1 >= 0
+x2_vals = np.linspace(1, 5, 500)  # Przedział x2 >= 0
+y_vals_r = np.linspace(0.01, 0.415, 500) # przed odwróceniem
+y_vals_l = np.linspace(-0.01, -0.36, 500)
+
+x3 = x3_fun(y_vals_r, c1, b1)
+
+dx3_dy = np.vectorize(dx3_dy_fun)(y_vals_r, c1, b1)
+print(np.size(dx3_dy), np.size(y_vals_r))
+
+# x3[-1] wartość odciętej na końcu funkcji prawej aproksymacji tarcia statycznego
+left_bound_log = calculate_x1(x3[-1], A, d1, d2)
+right_bound_log = calculate_x1(np.max(fi2d), A, d1, d2)
+print(y_vals_r[0], x3[-1], left_bound_log, np.max(fi2d))
+
+# Generate x1 values
+x1_values = np.linspace(left_bound_log, right_bound_log, 10)
+
+# Calculate y values for the function
+y_values = func_right_branch(x1_values, A=A, d1=d1, d2=d2)
+
+# Rysowanie wykresu
+plt.figure(figsize=(10, 10))
+
+# x3 i x4
+plt.subplot(2, 1, 2)
+
+# Rzeczywista charakterystyka momentu tarcia
+plt.scatter(fi2d, tau_f, label='Eksperymentalne dane', color='orange', s=6)
+
+plt.plot(y_values, x1_values, label=r'$f_r=A + d_1 \cdot \log_{10}(d_2 \cdot y)$', color='green')
+plt.plot(x3, y_vals_r, label=r'$x_3=\frac{\pi}{2}-\tan^{-1}(f_1(y))$', color='blue')
+plt.plot(x4(y_vals_l, c2, b2), y_vals_l, label=r'$x_4=-\frac{\pi}{2}-\tan^{-1}(f_2(y))$', color='purple')
+plt.axhline(0, color='black',linewidth=0.5)
+plt.axvline(0, color='black',linewidth=0.5)
+plt.title('Concatenated friction characteristics')
+plt.xlabel('$x_3(y)$')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.xlim(-0.2,0.25)
+plt.ylim(0,0.5)
+# Wyświetlanie wykresów
+plt.tight_layout()
+plt.show()
+</code></pre>
         </section>
 
         <!-- Stopka -->
